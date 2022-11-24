@@ -145,7 +145,7 @@ class PassphraseStorageService {
       return;
     }
 
-    const idleInterval = SESSION_CHECK_INTERNAL * 60; //idle time in seconds
+    const idleInterval = SESSION_CHECK_INTERNAL * 86400; //idle time in seconds
     browser.idle.queryState(idleInterval).then(async idleState => {
       if (idleState !== 'active' || this._masterPassword === null) {
         return;
