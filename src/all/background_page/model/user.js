@@ -353,7 +353,7 @@ const User = (function() {
    * @returns void
    */
   this.keepAlive = function() {
-    const idleInterval = 15 * 60; // detection interval in sec: 15 minutes
+    const idleInterval = 86400; // detection interval in sec: 15 minutes
     browser.idle.queryState(idleInterval).then(async idleState => {
       if (idleState === 'active' && this._masterPassword !== null) {
         const apiClientOptions = await this.getApiClientOptions();
@@ -481,9 +481,11 @@ const UserSingleton = (function() {
        * - Flush the temporary stored master password
        */
       window.addEventListener("passbolt.auth.after-logout", () => {
-        const user = UserSingleton.getInstance();
-        user.flushMasterPassword();
-        user.stopSessionKeepAlive();
+        /*
+         * const user = UserSingleton.getInstance();
+         * user.flushMasterPassword();
+         * user.stopSessionKeepAlive();
+         */
       });
     }
   };
